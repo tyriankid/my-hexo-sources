@@ -122,6 +122,7 @@ a:hover {
   font-size: 0.9em;
   line-height: 1;
   margin-top: 10px;
+  margin-left: 3px;
 }
 #header #main-nav {
   font-family: "Lato", Helvetica Neue, Helvetica, Arial, sans-serif;

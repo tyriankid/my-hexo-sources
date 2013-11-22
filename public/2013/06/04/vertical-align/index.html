@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>归档 | 许海浩的博客</title>
+  <title>总是记不住的垂直居中 | 许海浩的博客</title>
   <meta name="author" content="许海浩">
   
   <meta name="description" content="我是一名前端开发工程师，这是我的个人博客，编程，技术，以及生活。">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="总是记不住的垂直居中"/>
   <meta property="og:site_name" content="许海浩的博客"/>
 
   
@@ -43,37 +43,75 @@
 </nav>
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title">归档</h2>
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2013-06-04T13:20:05.000Z"><a href="/2013/06/04/vertical-align/">6月 4 2013</a></time>
+      
+      
+  
+    <h1 class="title">总是记不住的垂直居中</h1>
+  
 
+    </header>
+    <div class="entry">
+      
+        <p>刚入门前端的时候，就记住了单行文本可以用设置line-height与容器height相同值这个方法来实现垂直居中，但一直在潜意识地忽视多行文本的垂直居中，以至于之后在项目里每次遇到这个问题都会度娘很长时间！</p>
+<p>　　<strong>这次一定要记下来。</strong></p>
+<ol>
+<li><p>尝试过切一张1*height规格的透明图片放到容器里，让文字<code>vertical-align:middle;</code>，失败，后证实这个方法只适用于图片垂直居中。</p>
+</li>
+<li><p>设置文本父容器<code>display:table;</code>，文本的容器<code>display:table-cell; vertical-align:middle;</code>即可。</p>
+</li>
+</ol>
+<p>　　可是这一次为什么失效了呢？</p>
+<p>　　<del>因为bootstrap的默认样式将我现在用的<code>&lt;li&gt;</code>默认浮动了，</del></p>
+<p>　　因为我在<code>&lt;li&gt;</code>内部使用了bootstrap的<code>span*</code>布局，致使文字接受了<code>span*</code>的默认样式<code>[class*=&quot;span&quot;]{float: left;}</code>所以<del>响应</del>相应地加上<code>float:none;</code>就好了！</p>
+<p>　　<strong>这次一定要记住记住记住。</strong></p>
 
-  <div class="archive">
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2013-06-28T01:02:27.000Z"><a href="/2013/06/28/placeholder/">6月 28 2013</a></time>
-            
-              <h1 class="title"><a href="/2013/06/28/placeholder/">方便地获取任意规格的图片</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2013-06-04T13:20:05.000Z"><a href="/2013/06/04/vertical-align/">6月 4 2013</a></time>
-            
-              <h1 class="title"><a href="/2013/06/04/vertical-align/">总是记不住的垂直居中</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/css/">css</a>
   </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/垂直居中/">垂直居中</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <!-- Duoshuo Comment BEGIN -->
+    <div class="ds-thread"></div>
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:"xuhaihao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = 'http://static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0] 
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+  <!-- Duoshuo Comment END -->
+</section>
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
