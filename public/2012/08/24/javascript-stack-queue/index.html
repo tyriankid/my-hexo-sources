@@ -1,0 +1,254 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>随便说说JS数组中的栈与队列 | 许海浩的博客</title>
+  <meta name="author" content="许海浩">
+  
+  <meta name="description" content="我是一名前端开发工程师，这是我的个人博客，编程，技术，以及生活。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="随便说说JS数组中的栈与队列"/>
+  <meta property="og:site_name" content="许海浩的博客"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="/atom.xml" title="许海浩的博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">许海浩的博客</a></h1>
+  <h2><a href="/">前端开发小飘云</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">主页</a></li>
+    
+      <li><a href="/archives">所有文章</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2012-08-24T08:31:29.000Z"><a href="/2012/08/24/javascript-stack-queue/">2012 / 08 / 24</a></time>
+      
+      
+  
+    <h1 class="title">随便说说JS数组中的栈与队列</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3>1. 数组的栈操作</h3>
+<p>使用javascript给数组提供的<code>push()</code>和<code>pop()</code>方法，可以实现类似栈的操作:</p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre><span class="keyword">var</span> words=[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>];       <span class="comment">//创建一个数组；</span>
+
+<span class="keyword">var</span> count = words.push(<span class="string">'d'</span>);   <span class="comment">//  push方法推入新项，会放在数组的最后，并返回数组的长度。</span>
+
+alert(count);   <span class="comment">// 4</span>
+
+<span class="keyword">var</span> item = words.pop();   <span class="comment">//取出数组中最后一项，在数组中删除这一项，并返回取出的这一项。</span>
+
+alert(item);           <span class="comment">// 'd'</span>
+
+alert(words.length);   <span class="comment">//  3</span>
+</pre></td></tr></table></figure>
+
+<p><a id="more"></a></p>
+<h3>2. 数组的队列操作</h3>
+<p>使用以上介绍的<code>push()</code>并配合<code>shift()</code>可以实现数组队列的操作，因为<code>shift()</code>与<code>pop()</code>相反，是取出数组中的第一项并返回值。</p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre><span class="keyword">var</span> words = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>];       <span class="comment">//创建一个数组；</span>
+
+<span class="keyword">var</span> count = words.push(<span class="string">'d'</span>);  <span class="comment">// push方法推入新项，会放在数组的最后，并返回数组的长度。</span>
+
+alert(count);   <span class="comment">// 4，此时words顺序为['a', 'b', 'c', 'd']</span>
+
+<span class="keyword">var</span> item = words.shift();   <span class="comment">// 取得第一项，在数组中移除，并返回取出的这一项。</span>
+
+alert(item);   <span class="comment">// 'a' 此时words顺序为'b', 'c', 'd']</span>
+
+alert(words.length);  <span class="comment">//3</span>
+</pre></td></tr></table></figure>
+
+<p>如果想进行反向队列的操作，则相应地使用<code>unshift()</code>与<code>pop()</code>即可。依上述类推，很容易知道<code>unshift()</code>就是给数组从头部添加新项，并返回数组长度，这里就不写代码啦。</p>
+<h3>3. <strong>细节</strong>，关于同时给栈/队列新添两项的顺序问题</h3>
+<p>如果在以上的方法里给出两个参数或两个以上参数，他们的栈和队列放入和取出的顺序又是如何的呢？</p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="keyword">var</span> words = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>];
+
+words.push(<span class="string">'d'</span>, <span class="string">'e'</span>);  <span class="comment">// ['a', 'b', 'c', 'd', 'e']</span>
+
+words.unshift(<span class="string">'i'</span>, <span class="string">'j'</span>); <span class="comment">// ['i', 'j', 'a', 'b', 'c', 'd', 'e']</span>
+</pre></td></tr></table></figure>
+
+<p>以上代码的意思是，要注意，就算是<code>unshift(‘i’, ‘j’)</code>会在words数组头部像栈/队列一样放入数据，其也依然会将两个参数相对整体地一次插入进去，而不是如前文所说的将两个参数分开插入。否则‘i’和‘j’的顺序就不是参数里的顺序了。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/javascript/">javascript</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/栈/">栈</a>, <a href="/tags/队列/">队列</a>, <a href="/tags/javascript/">javascript</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <!-- Duoshuo Comment BEGIN -->
+    <div class="ds-thread"></div>
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:"xuhaihao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = 'http://static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0] 
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+  <!-- Duoshuo Comment END -->
+</section>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:xuhaihao.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/css/">css</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>2</small></li>
+  
+    <li><a href="/categories/发现/">发现</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>1</small></li>
+  
+    <li><a href="/tags/javascript/">javascript</a><small>2</small></li>
+  
+    <li><a href="/tags/placeholder/">placeholder</a><small>1</small></li>
+  
+    <li><a href="/tags/前端框架/">前端框架</a><small>1</small></li>
+  
+    <li><a href="/tags/垂直居中/">垂直居中</a><small>1</small></li>
+  
+    <li><a href="/tags/工具/">工具</a><small>1</small></li>
+  
+    <li><a href="/tags/栈/">栈</a><small>1</small></li>
+  
+    <li><a href="/tags/队列/">队列</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/jQuery/" style="font-size: 10.00px;">jQuery</a><a href="/tags/javascript/" style="font-size: 20.00px;">javascript</a><a href="/tags/placeholder/" style="font-size: 10.00px;">placeholder</a><a href="/tags/前端框架/" style="font-size: 10.00px;">前端框架</a><a href="/tags/垂直居中/" style="font-size: 10.00px;">垂直居中</a><a href="/tags/工具/" style="font-size: 10.00px;">工具</a><a href="/tags/栈/" style="font-size: 10.00px;">栈</a><a href="/tags/队列/" style="font-size: 10.00px;">队列</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2013 许海浩
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

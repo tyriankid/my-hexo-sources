@@ -45,11 +45,11 @@ alert(words.length);  //3
 如果在以上的方法里给出两个参数或两个以上参数，他们的栈和队列放入和取出的顺序又是如何的呢？
 
 ```javascript
-	var words = ['a', 'b', 'c'];
+var words = ['a', 'b', 'c'];
 
-	words.push('d', 'e');  // ['a', 'b', 'c', 'd', 'e']
+words.push('d', 'e');  // ['a', 'b', 'c', 'd', 'e']
 
-	words.unshift('i', 'j'); // ['i', 'j', 'a', 'b', 'c', 'd', 'e']
+words.unshift('i', 'j'); // ['i', 'j', 'a', 'b', 'c', 'd', 'e']
 
 ```
 
